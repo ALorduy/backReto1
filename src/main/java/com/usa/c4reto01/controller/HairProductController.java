@@ -4,8 +4,9 @@
  */
 package com.usa.c4reto01.controller;
 
-import com.usa.c4reto01.model.User;
-import com.usa.c4reto01.service.UserService;
+import com.usa.c4reto01.model.HairProduct;
+
+import com.usa.c4reto01.service.HairProductService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,43 +26,36 @@ import org.springframework.web.bind.annotation.RestController;
  * @author alberto
  */
 @RestController
-@RequestMapping("user")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
-public class UserController {
+@RequestMapping("hairproducts")
+@CrossOrigin("*")
+public class HairProductController {
     @Autowired
-    private UserService service;
+    private HairProductService service;
     
     @GetMapping("/all")
-    public List<User> getUser(){
+    public List<HairProduct> getAll(){
       return service.getAll();
     }
     
     @PostMapping("/new")   
     @ResponseStatus(HttpStatus.CREATED)
-    public User save(@RequestBody User user){
-        return service.save(user);
+    public HairProduct save(@RequestBody HairProduct product){
+        return service.save(product);
     }
     
     @PutMapping("/update")   
     @ResponseStatus(HttpStatus.CREATED)
-    public User update(@RequestBody User user){
-        return service.update(user);
+    public HairProduct update(@RequestBody HairProduct product){
+        return service.update(product);
     }
     
-    @DeleteMapping("/{id}")
+  
+    
+    @DeleteMapping("/{reference}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@PathVariable("id")Integer id ){
-        return service.delete(id);
+    public boolean delete(@PathVariable("reference") String reference) {
+        return service.delete(reference);
     }
     
-    @GetMapping("/emailexist/{email}")
-    public boolean existEmail(@PathVariable("email") String email){
-        return service.getUserByEmail(email);
-    }
-    
-    @GetMapping("/{email}/{password}")
-    public User authUser(@PathVariable("email") String email,@PathVariable("password") String password){
-        return service.getUserByEmailAndPassword(email, password);
-    }
-   
+  
 }

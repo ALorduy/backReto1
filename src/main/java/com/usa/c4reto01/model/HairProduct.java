@@ -4,13 +4,7 @@
  */
 package com.usa.c4reto01.model;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,18 +17,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "usuarios")
-public class User {
-
+@Document(collection = "hairproducts")
+public class HairProduct {
     @Id
-    private Integer id;
-    private String identification;
+    private String reference;
+    private String brand;
+    private String category;
     private String name;
-    private String address;
-    private String cellphone;
-    private String email;
-    private String Password;
-    private String zone;
-    private String type;
+    private String description;
+    private boolean availability = true;
+    private double price;
+    private int quantity;
+    private String photography;
 
+    
 }

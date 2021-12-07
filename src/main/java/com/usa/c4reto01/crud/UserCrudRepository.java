@@ -7,13 +7,14 @@ package com.usa.c4reto01.crud;
 import com.usa.c4reto01.model.User;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
 
 /**
  *
  * @author alberto
  */
-public interface UserCrudRepository extends CrudRepository <User,Integer> {
+public interface UserCrudRepository extends MongoRepository <User,Integer> {
     
     public Optional<User> findByName(String name);
     
@@ -23,6 +24,6 @@ public interface UserCrudRepository extends CrudRepository <User,Integer> {
     
     public Optional<User> findByEmailAndPassword(String email, String password);
     
-    
+    public List<User> findByIdOrEmailOrName(Integer id,String email, String name);
     
 }
